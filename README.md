@@ -51,10 +51,11 @@ Isso criará uma cópia local do repositório em sua máquina.
 
 
 ## Estrutura do Projeto
-
+```
 Condominium/
 ├── LICENSE
 └──  README.md
+```
 
 ## Licença
 
