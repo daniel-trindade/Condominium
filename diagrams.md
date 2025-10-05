@@ -43,15 +43,15 @@ graph TD
     C --> D{Horário livre?};
     D -- Sim --> E[Escolhe data e horário];
     E --> F[Confirma reserva];
-    F --> G{Condômino já tem <br> mais que 2 reservas?};
-    G -- Não --> H((Reserva confirmada<br>no sistema));
-    G -- Sim --> I((Exibe erro: limite<br>de reservas atingido));
+    F --> G{Já tem mais <br> que 2 reservas?};
+    G -- Não --> I((Reserva concluida));
+    G -- Sim --> J((Limite de<br>reservas atingido));
     
 
     D -- Não --> H[Exibe horários disponíveis];
     H --> B;
 
-    class A,B,C,D,E,F,G,H,I s_font;
+    class A,B,C,D,E,F,G,H,I,J s_font;
 ```
 ## Controle de Correspondências
 
