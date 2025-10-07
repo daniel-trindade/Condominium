@@ -3,7 +3,8 @@
 
 - [Sobre o Projeto](#sobre-o-projeto)
 - [Como clonar ou baixar](#como-clonar-ou-baixar)  
-- [Estrutura do Projeto](#estrutura-do-projeto)  
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Diagramas do Projeto](#diagramas-do-projeto) 
 - [Licença](#licença)  
 
 ## Sobre o Projeto
@@ -54,8 +55,14 @@ Isso criará uma cópia local do repositório em sua máquina.
 ```
 Condominium/
 ├── LICENSE
+└── diagrams/   : Pasta contendo o diagrama de classes
+└── diagrams.md  : arquivo explicando em detalhes os diagramas estruturais e comportamenais
 └──  README.md
 ```
+## Diagramas do Projeto
+
+O projeto inclui diagramas que ajudam a entender a estrutura e o comportamento do sistema.
+> Consulte `diagrams.md` para uma explicação completa dos diagramas e do seu papel no projeto.
 
 ## Licença
 
