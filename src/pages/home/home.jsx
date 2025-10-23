@@ -4,8 +4,10 @@ import styles from './home.module.css';
 function Home() {
   return (
     <div className={styles.home}>
-      <h1>Página Inicial</h1>
-      <p>Bem-vindo à nossa página principal!</p>
+      <h1>Bem vindo Daniel</h1>
+      <p>Aqui estão seus atalhos:</p>
+
+
     </div>
   );
 }

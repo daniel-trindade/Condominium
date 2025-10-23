@@ -1,9 +1,11 @@
+import styles from './footer.module.css'
+
 function Footer() {
 
   return (
     <>
-      <footer>
-        <p>© 2024 Condomínium. All rights reserved.</p>
+      <footer className={styles.footer}>
+        <p>© EngSoft 2025.2</p>
       </footer>
     </>
   )
