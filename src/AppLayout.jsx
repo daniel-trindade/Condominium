@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom';  
 
-import NavbarLoginPage from './components/navbar/navbar_login_page';
-import Navbar from './components/navbar/navbar'
-import Footer from './components/footer/footer'
+import NavbarLoginPage from './components/login_navbar/Navbar_login_page';
+import Navbar from './components/login_navbar/Navbar'
+import Footer from './components/footer/Footer'
 import Login from './pages/login/login'
 import Home from './pages/home/home'
 

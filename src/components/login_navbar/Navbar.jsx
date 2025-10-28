@@ -1,16 +1,17 @@
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo_branco.svg'
 import user_icon from '../../assets/user-icon.png'
-import styles from './header.module.css'
+import styles from './Navbar.module.css'
 
-function Header() {
+function Navbar() {
 
   return (
     <>
       <nav className={styles.nav}>
-        <a href="#">
+        <a href="/">
             <img src={logo} alt="Logo" className={styles.logo}/>
+            <h1>Condomínium</h1>
         </a>
-        <h1>Condomínium</h1>
+        
 
         <ul className={styles.menu}>
             <li><a href="#">Cadastros</a></li>
@@ -34,4 +35,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Navbar
