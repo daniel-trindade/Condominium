@@ -5,7 +5,9 @@ function Container({ children }) {
 
   return (
     <div className={styles.container}>
-        {children}
+        <div className={styles.content}>
+          {children}
+        </div>
     </div>
   )
 }

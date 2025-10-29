@@ -1,6 +1,33 @@
+/* Container.module.css */
+
 .container {
+    position: relative;
+    overflow: hidden;
     background-color: #E6E6E6;
     width: 100%;
     min-height: calc(100vh - 166px);
     padding : 20px;
+}
+
+.container::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url("../../assets/condominio_silhueta.png");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100%;
+
+    opacity: .1;
+
+    z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
 }
