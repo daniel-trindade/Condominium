@@ -42,27 +42,38 @@ function Condominos() {
 
               <form action="" className={styles.form}>
                 
-                <label>Nome do Condomínio:
+                <div className={styles.formField}>
+                  <label for="nome" >Nome do Condomínio:</label>
                   <input type="text" name="nome" />
-                </label>
+                </div>
 
-                <label>CPF:
+                <div className={styles.formField}>
+                  <label for="telefone">Telefone:</label>
+                  <input type="text" name="telefone" />
+                </div>
+
+                <div className={styles.formField}>
+                  <label for="cpf">CPF:</label>
                   <input type="text" name="cpf" />
-                </label>
+                </div>
 
-                <label>Data de Nascimento:
+                <div className={styles.formField}>
+                  <label for="data_nascimento">Data de Nascimento:</label>
                   <input type="text" name="data_nascimento" />
-                </label>
+                </div>
                 
-                <div>
-                  <label>
-                    Bloco:
+                <div className={styles.fieldBlock}>
+
+                  <div className={styles.formField}>
+                    <label for="bloco" >Bloco:</label>
                     <input type="text" name="bloco" />
-                  </label>
-                  <label>
-                    Apartamento:
+                  </div>
+
+                  <div className={styles.formField}>
+                    <label for="apartamento">Apartamento:</label>
                     <input type="text" name="apartamento" />
-                  </label>
+                  </div>
+
                 </div>
 
               </form>
