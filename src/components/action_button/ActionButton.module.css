@@ -1,0 +1,25 @@
+.actionButton {
+  width: 220px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  border-radius: 30px;
+  border: 1px solid #44576D;
+  box-shadow: 4px 4px 4px #44576D;
+}
+
+.actionButton:hover {
+  cursor: pointer;
+  background-color: #AAC7D8;
+  color: white;
+  box-shadow: none;
+  transition: 0.3s;
+}
+
+.icon{
+  width: 40px;
+  margin: 10px;
+}

@@ -15,20 +15,20 @@ function Home() {
           </div>
           <div className={styles.menu}>
             <MenuCard
-              title= "Consultar Condômino"
+              title= "Condôminos"
               description="Aqui você pode consultar a lista de condôminos cadastrados"
-              link="/login"
+              link="/condominos"
               icon={cons_cond} 
             />
             <MenuCard
-              title= "Consultar Veículo"
-              description="Aqui você pode consultar a lista de condôminos cadastrados"
+              title= "Veículos"
+              description="Aqui você pode consultar a lista de veículos cadastrados"
               link="/login"
               icon={cons_car} 
             />
             <MenuCard
               title= "Correspondência"
-              description="Aqui você pode consultar a lista de condôminos cadastrados"
+              description="Gerenciador de correspondências do condomínio"
               link="/login"
               icon={corres} 
             />
