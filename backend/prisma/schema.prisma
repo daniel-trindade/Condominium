@@ -1,0 +1,71 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Condomino {
+  id           Int @id @default(autoincrement())
+  nome         String
+  apartamento  Int
+  telefone     String
+  cpf          String @unique
+  correspondencias Correspondencia[]
+  acessos      Acesso[]
+}
+
+model Porteiro {
+  id        Int @id @default(autoincrement())
+  nome      String
+  cpf       String @unique
+  telefone  String
+  turno     String
+}
+
+model Visitante {
+  id       Int @id @default(autoincrement())
+  nome     String
+  cpf      String?
+  acessos  Acesso[]
+}
+
+model Entregador {
+  id       Int @id @default(autoincrement())
+  nome     String
+  empresa  String?
+  acessos  Acesso[]
+}
+
+model Correspondencia {
+  id              Int @id @default(autoincrement())
+  tipo            String
+  dataRecebimento DateTime @default(now())
+  dataRetirada    DateTime?
+  status          String
+  destinatarioId  Int
+  destinatario    Condomino @relation(fields: [destinatarioId], references: [id])
+
+  @@index([destinatarioId])
+}
+
+model Acesso {
+  id           Int @id @default(autoincrement())
+  tipoPessoa   String
+  status       String
+  dataEntrada  DateTime @default(now())
+  dataSaida    DateTime?
+  condominoId  Int?
+  visitanteId  Int?
+  entregadorId Int?
+
+  condomino    Condomino? @relation(fields: [condominoId], references: [id])
+  visitante    Visitante? @relation(fields: [visitanteId], references: [id])
+  entregador   Entregador? @relation(fields: [entregadorId], references: [id])
+
+  @@index([condominoId])
+  @@index([visitanteId])
+  @@index([entregadorId])
+}
