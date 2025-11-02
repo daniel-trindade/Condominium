@@ -13,6 +13,7 @@ model Condomino {
   apartamento  Int
   telefone     String
   cpf          String @unique
+  senha        String
   correspondencias Correspondencia[]
   acessos      Acesso[]
 }
@@ -21,6 +22,7 @@ model Porteiro {
   id        Int @id @default(autoincrement())
   nome      String
   cpf       String @unique
+  senha     String
   telefone  String
   turno     String
 }
