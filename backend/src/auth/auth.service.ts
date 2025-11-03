@@ -10,24 +10,42 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(cpf: string, senha: string) {
+  async validateUser(email: string, senha: string) {
     // Tenta encontrar no Condômino
-    const condominio = await this.prisma.condomino.findUnique({ where: { cpf } });
-    if (condominio && await bcrypt.compare(senha, condominio.senha)) {
-      return { id: condominio.id, role: 'condomino' };
+    const usuario = await this.prisma.usuario.findUnique({ where: { email } });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    if(!usuario ||  (await bcrypt.compare(senha, usuario.senha))) {
+      throw new UnauthorizedException('Email ou senha inválidos');
+    }
+    const condominio = await this.prisma.condomino.findUnique({ where: {id:usuario.id}})
+    if (condominio) {
+      return { 
+        id: condominio.id, 
+        nome: usuario.nome,
+        role: 'condomino', 
+      };
     }
 
     // Tenta encontrar no Porteiro
-    const porteiro = await this.prisma.porteiro.findUnique({ where: { cpf } });
-    if (porteiro && await bcrypt.compare(senha, porteiro.senha)) {
-      return { id: porteiro.id, role: 'porteiro' };
+    const porteiro = await this.prisma.porteiro.findUnique({ where: {id:usuario.id}});
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    if (porteiro) {
+      return { 
+        id: porteiro.id,
+        nome: usuario.nome,
+        role: 'porteiro',
+      };
     }
 
-    throw new UnauthorizedException('CPF ou senha inválidos');
+    return {
+      id: usuario.id,
+      nome: usuario.nome,
+      role: 'admin',
+    };
   }
 
-  async login(cpf: string, senha: string) {
-    const user = await this.validateUser(cpf, senha);
+  async login(email: string, senha: string) {
+    const user = await this.validateUser(email, senha);
     const payload = { sub: user.id, role: user.role };
 
     return {

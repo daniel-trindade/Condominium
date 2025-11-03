@@ -6,25 +6,39 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  tipo      TipoUsuario // ADMIN, CONDOMINO, PORTEIRO
+  createdAt DateTime @default(now())
+
+  Condomino  Condomino?
+  Porteiro   Porteiro?
+}
 
 model Condomino {
   id           Int @id @default(autoincrement())
-  nome         String
-  apartamento  Int
+  cpf          String   @unique
   telefone     String
-  cpf          String @unique
-  senha        String
+  apartamento  String
+  andar        Int      @default(0)
+  usuarioId    Int      @unique  @default(1)
+  usuario      Usuario  @relation(fields: [usuarioId], references: [id])
+  
+  //reservas     Reserva[]
   correspondencias Correspondencia[]
   acessos      Acesso[]
 }
 
 model Porteiro {
   id        Int @id @default(autoincrement())
-  nome      String
   cpf       String @unique
-  senha     String
   telefone  String
   turno     String
+  usuarioId Int      @unique @default(1)
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
 }
 
 model Visitante {
@@ -70,4 +84,10 @@ model Acesso {
   @@index([condominoId])
   @@index([visitanteId])
   @@index([entregadorId])
+}
+
+enum TipoUsuario {
+  ADMIN
+  CONDOMINO
+  PORTEIRO
 }
