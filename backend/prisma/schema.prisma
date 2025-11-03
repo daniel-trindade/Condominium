@@ -26,11 +26,25 @@ model Condomino {
   andar        Int      @default(0)
   usuarioId    Int      @unique  @default(1)
   usuario      Usuario  @relation(fields: [usuarioId], references: [id])
-  
+  veiculos       Veiculo[] 
   reservas     Reserva[]
   correspondencias Correspondencia[]
   acessos      Acesso[]
   notificacoes Notificacao[]
+}
+
+model Veiculo {
+  id           Int        @id @default(autoincrement())
+  cor          String
+  modelo       String
+  marca        String
+  placa        String     @unique
+  ano          Int
+  bloco        String
+  apartamento  String
+  condominoId  Int
+  condomino    Condomino  @relation(fields: [condominoId], references: [id])
+  createdAt    DateTime   @default(now())
 }
 
 model Porteiro {
