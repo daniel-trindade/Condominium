@@ -164,7 +164,7 @@ function Condominos() {
                 <div className={styles.fieldBlock}>
 
                   <div className={styles.formField}>
-                    <label for="bloco" >Bloco:</label>
+                    <label for="bloco">Bloco:</label>
                     <input
                       onChange={handleChange}
                       type="text"
@@ -211,7 +211,7 @@ function Condominos() {
               
               {modoConsulta === 'cpf' && (
                 <div className={styles.successMessage}>
-                  <form>
+                  <form className={styles.formConsult}>
                     <label htmlFor="cpf">Digite o CPF:</label>
                     <input type="text" id="cpf" name="cpf" />
                     <button type="submit">Consultar</button>
@@ -221,13 +221,29 @@ function Condominos() {
 
               {modoConsulta === 'nome' && (
                 <div className={styles.successMessage}>
-                  <h2>Consulta por Nome</h2>
+                  <form className={styles.formConsult}>
+                    <label htmlFor="nome">Digite o Nome:</label>
+                    <input type="text" id="nome" name="nome" />
+                    <button type="submit">Consultar</button>
+                  </form>
                 </div>
               )}
 
               {modoConsulta === 'apartamento' && (
                 <div className={styles.successMessage}>
-                  <h2>Consulta por Apartamento</h2>
+                  <form className={styles.formConsult}>
+                    <div className={styles.apBloco}>
+                      <div>
+                        <label htmlFor="bloco">Digite o Bloco:</label>
+                        <input type="text" id="bloco" name="bloco" />
+                      </div>
+                      <div>
+                        <label htmlFor="apartamento">Digite o Apartamento:</label>
+                        <input type="text" id="apartamento" name="apartamento" />
+                      </div>
+                    </div>
+                    <button type="submit">Consultar</button>
+                  </form>
                 </div>
               )}
             </div>

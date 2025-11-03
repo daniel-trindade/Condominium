@@ -1,0 +1,101 @@
+.veiculosContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonsArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 50px;
+}
+
+.contentContainer {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addVeiculo{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  gap: 5px;
+  margin: 30px 0;
+}
+
+.formField {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+  label {
+    width: 78%;
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 80%;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid #44576D;
+    font-size: 16px;
+    padding: 5px;
+  }
+}
+
+.fieldBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+  .formField {
+    width: 38%;
+
+    input {
+      width: 100%;
+    }
+    label{
+      width: 100%;
+    }
+  
+  }
+}
+
+.submitButton {
+  width: 80%;
+  height: 40px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  border-radius: 30px;
+  border: 2px solid #44576D;
+  box-shadow: 4px 4px 4px #44576D;
+  background-color: #aac7d8;
+  color: #000;
+  font-size: 18px;
+}

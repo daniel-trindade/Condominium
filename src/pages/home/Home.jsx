@@ -4,6 +4,7 @@ import MenuCard from '../../components/menuCard/MenuCard';
 import cons_cond from '../../assets/consultar_condomino.png'
 import cons_car from '../../assets/consultar_carro.png'
 import corres from '../../assets/correspondencia.png'
+import reservas from '../../assets/reservas.png';
 
 function Home() {
   return (
@@ -23,7 +24,7 @@ function Home() {
             <MenuCard
               title= "Veículos"
               description="Aqui você pode consultar a lista de veículos cadastrados"
-              link="/login"
+              link="/veiculos"
               icon={cons_car} 
             />
             <MenuCard
@@ -33,10 +34,10 @@ function Home() {
               icon={corres} 
             />
             <MenuCard
-              title= "Consultar Condômino"
+              title= "Áreas Comum"
               description="Aqui você pode consultar a lista de condôminos cadastrados"
               link="/login"
-              icon={cons_cond} 
+              icon={reservas} 
             />
             <MenuCard
               title= "Consultar Condômino"

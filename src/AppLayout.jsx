@@ -6,6 +6,9 @@ import Footer from './components/footer/Footer'
 import Login from './pages/login/Login'
 import Home from './pages/home/Home'
 import Condominos from './pages/condominos/Condominos';
+import Veiculos from './pages/veiculos/Veiculos';
+
+
 
 import './App.css'
 
@@ -21,6 +24,7 @@ function AppLayout() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/condominos' element={<Condominos />} />
+        <Route path='/veiculos' element={<Veiculos />} />
       </Routes>
 
       <Footer />
