@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { CorrespondenciaService } from './correspondencia.service';
-import {
-  RegistrarEntradaDto,
-  RegistrarRetiradaDto,
-  NotificarCondominoDto,
-} from './dto';
+
+import { RegistrarAcessoDto } from 'src/acesso/dto/registrar-acesso.dto';
+import { RegistrarEntradaDto } from './dto/registrar-entrada.dto';
+import { NotificarCondominoDto } from './dto/notificar-condomino.dto';
+import { RegistrarRetiradaDto } from './dto/registrar-retirada.dto';
 
 @Controller('correspondencias')
 export class CorrespondenciaController {

@@ -1,11 +1,9 @@
 import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { AcessoService } from './acesso.service';
-import {
-  CriarVisitanteDto,
-  CriarEntregadorDto,
-  RegistrarAcessoDto,
-  AtualizarAutorizacaoDto,
-} from './dto';
+import { CriarEntregadorDto } from './dto/criar-entregador.dto';
+import { CriarVisitanteDto } from './dto/criar-visitante.dto';
+import { RegistrarAcessoDto } from './dto/registrar-acesso.dto';
+import { AtualizarAutorizacaoDto } from './dto/atualizar-autorizacao.dto';
 
 @Controller('acesso')
 export class AcessoController {

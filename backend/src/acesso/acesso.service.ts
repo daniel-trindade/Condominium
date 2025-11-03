@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma.service';
-import {
-  CriarVisitanteDto,
-  CriarEntregadorDto,
-  RegistrarAcessoDto,
-  AtualizarAutorizacaoDto,
-} from './dto';
 
+import { CriarEntregadorDto } from './dto/criar-entregador.dto';
+import { CriarVisitanteDto } from './dto/criar-visitante.dto';
+import { RegistrarAcessoDto } from './dto/registrar-acesso.dto';
+import { AtualizarAutorizacaoDto } from './dto/atualizar-autorizacao.dto';
 @Injectable()
 export class AcessoService {
   constructor(private prisma: PrismaService) {}
@@ -27,11 +25,15 @@ export class AcessoService {
     id: number,
     dto: AtualizarAutorizacaoDto,
   ) {
-    const model = tipo === 'visitante' ? this.prisma.visitante : this.prisma.entregador;
-    return model.update({
-      where: { id },
-      data: { autorizado: dto.autorizado },
-    });
+    if (tipo=== 'entregador') {
+      const where = { id };
+      return this.prisma.entregador.update({ where, data: dto });
+    }
+    if (tipo === 'visitante') {
+      const where = { id };
+      return this.prisma.visitante.update({ where, data: dto });
+    }
+
   }
 
   // 🔹 Buscar pessoa (visitante, entregador ou condômino)
@@ -44,9 +46,9 @@ export class AcessoService {
         where: { nome: { contains: nome ?? '' } },
       }),
       this.prisma.condomino.findMany({
-        where: { nome: { contains: nome ?? '' } },
+        where: { usuario: { is: { nome: { contains: nome ?? '' }  } } },
       }),
-    ]);
+    ]); 
 
     return { visitantes, entregadores, condominos };
   }

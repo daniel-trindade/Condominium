@@ -14,10 +14,10 @@ export class AuthService {
     // Tenta encontrar no Condômino
     const usuario = await this.prisma.usuario.findUnique({ where: { email } });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    if(!usuario ||  (await bcrypt.compare(senha, usuario.senha))) {
+    if(!usuario ||  !(await bcrypt.compare(senha, usuario.senha))) {
       throw new UnauthorizedException('Email ou senha inválidos');
     }
-    const condominio = await this.prisma.condomino.findUnique({ where: {id:usuario.id}})
+    const condominio = await this.prisma.condomino.findUnique({ where: { usuarioId: usuario.id }})
     if (condominio) {
       return { 
         id: condominio.id, 
@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     // Tenta encontrar no Porteiro
-    const porteiro = await this.prisma.porteiro.findUnique({ where: {id:usuario.id}});
+    const porteiro = await this.prisma.porteiro.findUnique({ where: { usuarioId: usuario.id }});
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     if (porteiro) {
       return { 

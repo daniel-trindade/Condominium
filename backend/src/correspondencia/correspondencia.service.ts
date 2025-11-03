@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma.service';
-import {
-  RegistrarEntradaDto,
-  RegistrarRetiradaDto,
-  NotificarCondominoDto,
-} from './dto';
+import { RegistrarAcessoDto } from 'src/acesso/dto/registrar-acesso.dto';
+import { RegistrarEntradaDto } from './dto/registrar-entrada.dto';
+import { NotificarCondominoDto } from './dto/notificar-condomino.dto';
+import { RegistrarRetiradaDto } from './dto/registrar-retirada.dto';
 
 @Injectable()
 export class CorrespondenciaService {
