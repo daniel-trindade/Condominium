@@ -27,9 +27,10 @@ model Condomino {
   usuarioId    Int      @unique  @default(1)
   usuario      Usuario  @relation(fields: [usuarioId], references: [id])
   
-  //reservas     Reserva[]
+  reservas     Reserva[]
   correspondencias Correspondencia[]
   acessos      Acesso[]
+  notificacoes Notificacao[]
 }
 
 model Porteiro {
@@ -39,51 +40,97 @@ model Porteiro {
   turno     String
   usuarioId Int      @unique @default(1)
   usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+  acessos          Acesso[]
+  correspondencias Correspondencia[]
 }
 
 model Visitante {
-  id       Int @id @default(autoincrement())
-  nome     String
-  cpf      String?
-  acessos  Acesso[]
+  id          Int      @id @default(autoincrement())
+  nome        String
+  documento   String?
+  autorizado  Boolean  @default(false)
+  acessos     Acesso[]
 }
 
 model Entregador {
-  id       Int @id @default(autoincrement())
-  nome     String
-  empresa  String?
-  acessos  Acesso[]
-}
-
-model Correspondencia {
-  id              Int @id @default(autoincrement())
-  tipo            String
-  dataRecebimento DateTime @default(now())
-  dataRetirada    DateTime?
-  status          String
-  destinatarioId  Int
-  destinatario    Condomino @relation(fields: [destinatarioId], references: [id])
-
-  @@index([destinatarioId])
+  id          Int      @id @default(autoincrement())
+  nome        String
+  empresa     String?
+  documento   String?
+  autorizado  Boolean  @default(false)
+  acessos     Acesso[]
 }
 
 model Acesso {
-  id           Int @id @default(autoincrement())
-  tipoPessoa   String
-  status       String
-  dataEntrada  DateTime @default(now())
-  dataSaida    DateTime?
-  condominoId  Int?
-  visitanteId  Int?
-  entregadorId Int?
+  id            Int       @id @default(autoincrement())
+  tipo          TipoAcesso
+  dataEntrada   DateTime  @default(now())
+  dataSaida     DateTime?
+  observacao    String?
+  condominoId   Int?
+  visitanteId   Int?
+  entregadorId  Int?
+  porteiroId    Int?
 
-  condomino    Condomino? @relation(fields: [condominoId], references: [id])
-  visitante    Visitante? @relation(fields: [visitanteId], references: [id])
-  entregador   Entregador? @relation(fields: [entregadorId], references: [id])
+  condomino     Condomino?  @relation(fields: [condominoId], references: [id])
+  visitante     Visitante?  @relation(fields: [visitanteId], references: [id])
+  entregador    Entregador? @relation(fields: [entregadorId], references: [id])
+  porteiro      Porteiro?   @relation(fields: [porteiroId], references: [id])
+}
 
-  @@index([condominoId])
-  @@index([visitanteId])
-  @@index([entregadorId])
+model Correspondencia {
+  id              Int       @id @default(autoincrement())
+  descricao       String
+  tipo            TipoCorrespondencia
+  dataRecebimento DateTime  @default(now())
+  dataRetirada    DateTime?
+  retiradoPor     String?
+  porteiroId      Int
+  condominoId     Int
+
+  porteiro  Porteiro   @relation(fields: [porteiroId], references: [id])
+  condomino Condomino  @relation(fields: [condominoId], references: [id])
+}
+
+model Notificacao {
+  id           Int      @id @default(autoincrement())
+  mensagem     String
+  dataEnvio    DateTime @default(now())
+  condominoId  Int
+  condomino    Condomino @relation(fields: [condominoId], references: [id])
+}
+
+model AreaComum {
+  id        Int       @id @default(autoincrement())
+  nome      String
+  descricao String?
+  reservas  Reserva[]
+}
+
+model Reserva {
+  id            Int       @id @default(autoincrement())
+  dataReserva   DateTime
+  horarioInicio DateTime
+  horarioFim    DateTime
+  areaId        Int
+  condominoId   Int
+  area          AreaComum   @relation(fields: [areaId], references: [id])
+  condomino     Condomino   @relation(fields: [condominoId], references: [id])
+  status        String      @default("pendente")
+  criadaEm      DateTime    @default(now())
+}
+
+enum TipoAcesso {
+  CONDOMINO
+  VISITANTE
+  ENTREGADOR
+}
+
+enum TipoCorrespondencia {
+  CARTA
+  ENCOMENDA
+  DOCUMENTO
+  OUTRO
 }
 
 enum TipoUsuario {
