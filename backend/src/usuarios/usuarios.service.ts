@@ -1,14 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { TipoUsuario } from '@prisma/client';
 import { CreateUsuarioDto } from './dto/createUsuario.dto';
+import { UpdateUsuarioDto } from './dto/updateUsuario.dto';
 
 @Injectable()
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
-  async criarUsuario(data: CreateUsuarioDto) {
+  async create(data: CreateUsuarioDto) {
+    const usuarioExistente = await this.prisma.usuario.findUnique({
+      where: { email: data.email }
+    });
+
+    if (usuarioExistente) {
+      throw new BadRequestException('E-mail já está cadastrado.');
+    }
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const senhaCriptografada = await bcrypt.hash(data.senha, 10);
 
@@ -24,8 +32,20 @@ export class UsuariosService {
     });
   }
 
-  async listarUsuarios() {
+  async findAll() {
     return this.prisma.usuario.findMany();
   }
+
+  async update(id: number, data: UpdateUsuarioDto) {
+  if (data.senha) {
+    data.senha = await bcrypt.hash(data.senha, 10);
+  }
+
+  return this.prisma.usuario.update({
+    where: { id },
+    data,
+  });
+}
+
 
 }

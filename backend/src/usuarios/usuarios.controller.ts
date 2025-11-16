@@ -1,18 +1,28 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/createUsuario.dto';
+import { UpdateUsuarioDto } from './dto/updateUsuario.dto';
 
-@Controller('usuarios')
+@Controller('users')
 export class UsuariosController {
-  constructor(private readonly service: UsuariosService) {}
+  constructor(private readonly usuarioService: UsuariosService) {}
 
   @Post()
-  async criar(@Body() data: CreateUsuarioDto) {
-    return this.service.criarUsuario(data);
+  async createUser(@Body() data: CreateUsuarioDto) {
+    return this.usuarioService.create(data);
   }
 
   @Get()
   async listar() {
-    return this.service.listarUsuarios();
+    return this.usuarioService.findAll();
   }
+
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateUsuarioDto: UpdateUsuarioDto,
+  ) {
+    return this.usuarioService.update(+id, updateUsuarioDto);
+  }
+
 }
