@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma.service';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { CreateCondominoDto } from './dto/createCondomino.dto';
+import { UpdateCondDto } from './dto/updateCond.dto';
 
 @Injectable()
 export class CondominosService {
@@ -10,7 +11,7 @@ export class CondominosService {
     private usuariosService: UsuariosService,
   ) {}
 
-  async cadastrar (data: CreateCondominoDto){
+  async registerUnitOwner(data: CreateCondominoDto){
     const usuario = await this.usuariosService.createUser({
       nome: data.nome,
       email: data.email,
@@ -29,14 +30,14 @@ export class CondominosService {
     });
   }
 
-  listar() {
+  findAllUnitOwner() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
     return this.prisma.condomino.findMany({
       include: { usuario: true },
     });
   }
 
-  async pesquisarPorFiltros(filtros: {
+  async searchByFilters(filtros: {
     nome?: string;
     cpf?: string;
     apartamento?: string;
@@ -73,5 +74,33 @@ export class CondominosService {
       include: { usuario: true },
     });
   }
+
+  async update(id: number, data: UpdateCondDto) {
+    const cond = await this.prisma.condomino.findUnique({ where: { id } });
+
+    if (!cond) throw new NotFoundException('Condômino não encontrado.');
+
+    return this.prisma.condomino.update({
+      where: { id },
+      data,
+      include: { usuario: true },
+    });
+  }
+
+  // ----------------------------
+  // DELETE
+  // ----------------------------
+  async remove(id: number) {
+    const cond = await this.prisma.condomino.findUnique({ where: { id } });
+    if (!cond) throw new NotFoundException('Condômino não encontrado.');
+
+    // Exclui o usuário vinculado junto
+    await this.prisma.usuario.delete({
+      where: { id: cond.usuarioId },
+    });
+    
+    return { message: 'Condômino removido com sucesso' };
+  }
+  
 
 }
