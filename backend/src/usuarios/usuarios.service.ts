@@ -37,15 +37,22 @@ export class UsuariosService {
   }
 
   async update(id: number, data: UpdateUsuarioDto) {
-  if (data.senha) {
-    data.senha = await bcrypt.hash(data.senha, 10);
+    if (data.senha) {
+      data.senha = await bcrypt.hash(data.senha, 10);
+    }
+
+    return this.prisma.usuario.update({
+      where: { id },
+      data,
+    });
   }
 
-  return this.prisma.usuario.update({
-    where: { id },
-    data,
-  });
-}
+  async remove(id: number) {
+    return this.prisma.usuario.delete({
+      where: { id },
+    });
+  }
+
 
 
 }
