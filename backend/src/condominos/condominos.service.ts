@@ -11,7 +11,7 @@ export class CondominosService {
   ) {}
 
   async cadastrar (data: CreateCondominoDto){
-    const usuario = await this.usuariosService.criarUsuario({
+    const usuario = await this.usuariosService.createUser({
       nome: data.nome,
       email: data.email,
       senha: data.senha,

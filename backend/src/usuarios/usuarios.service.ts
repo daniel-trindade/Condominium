@@ -9,7 +9,7 @@ import { UpdateUsuarioDto } from './dto/updateUsuario.dto';
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateUsuarioDto) {
+  async createUser(data: CreateUsuarioDto) {
     const usuarioExistente = await this.prisma.usuario.findUnique({
       where: { email: data.email }
     });
@@ -36,7 +36,7 @@ export class UsuariosService {
     return this.prisma.usuario.findMany();
   }
 
-  async update(id: number, data: UpdateUsuarioDto) {
+  async updateUser(id: number, data: UpdateUsuarioDto) {
     if (data.senha) {
       data.senha = await bcrypt.hash(data.senha, 10);
     }
@@ -47,7 +47,7 @@ export class UsuariosService {
     });
   }
 
-  async remove(id: number) {
+  async removeUser(id: number) {
     return this.prisma.usuario.delete({
       where: { id },
     });

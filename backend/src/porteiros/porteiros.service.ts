@@ -17,7 +17,7 @@ export class PorteirosService {
     senha: string;
     turno: string; // ex: "manhã", "tarde", "noite"
   }) {
-    const usuario = await this.usuariosService.criarUsuario({
+    const usuario = await this.usuariosService.createUser({
       nome: data.nome,
       email: data.cpf,
       senha: data.senha,

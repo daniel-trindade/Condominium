@@ -9,7 +9,7 @@ export class UsuariosController {
 
   @Post()
   async createUser(@Body() data: CreateUsuarioDto) {
-    return this.usuarioService.create(data);
+    return this.usuarioService.createUser(data);
   }
 
   @Get()
@@ -22,12 +22,12 @@ export class UsuariosController {
     @Param('id') id: string,
     @Body() updateUsuarioDto: UpdateUsuarioDto,
   ) {
-    return this.usuarioService.update(+id, updateUsuarioDto);
+    return this.usuarioService.updateUser(+id, updateUsuarioDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usuarioService.remove(+id);
+    return this.usuarioService.removeUser(+id);
   }
 
 }
