@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common
 import { AcessoService } from './acesso.service';
 import { CriarEntregadorDto } from './dto/criar-entregador.dto';
 import { CriarVisitanteDto } from './dto/criar-visitante.dto';
+import { PrismaService } from '../common/prisma.service';
 import { RegistrarAcessoDto } from './dto/registrar-acesso.dto';
 import { AtualizarAutorizacaoDto } from './dto/atualizar-autorizacao.dto';
 

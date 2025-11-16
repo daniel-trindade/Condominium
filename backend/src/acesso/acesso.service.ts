@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/common/prisma.service';
-
+import { PrismaService } from '../common/prisma.service';
 import { CriarEntregadorDto } from './dto/criar-entregador.dto';
 import { CriarVisitanteDto } from './dto/criar-visitante.dto';
 import { RegistrarAcessoDto } from './dto/registrar-acesso.dto';
