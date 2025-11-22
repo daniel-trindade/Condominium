@@ -38,7 +38,7 @@ export class CondominosController {
   }
 
   @Patch(':id')
-  @Roles('admin')
+  @Roles('admin', 'condomino')
   update(
     @Param('id') id: string,
     @Body() updateDto: UpdateCondDto,

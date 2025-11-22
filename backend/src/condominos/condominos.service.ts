@@ -3,6 +3,7 @@ import { PrismaService } from 'src/common/prisma.service';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { CreateCondominoDto } from './dto/createCondomino.dto';
 import { UpdateCondDto } from './dto/updateCond.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CondominosService {
@@ -54,7 +55,7 @@ export class CondominosService {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     if (cpf) where.AND.push({ cpf: { contains: cpf } });
 
-  // 🔹 Se vier apartamento e andar, busca pelos dois juntos
+  
     if (apartamento && andar) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       where.AND.push({
@@ -76,15 +77,28 @@ export class CondominosService {
   }
 
   async update(id: number, data: UpdateCondDto) {
+    const { nome, email, senha, ...condominoData } = data
     const cond = await this.prisma.condomino.findUnique({ where: { id } });
 
     if (!cond) throw new NotFoundException('Condômino não encontrado.');
 
+    let senhaCriptografada;
+    if(data.senha) senhaCriptografada = await bcrypt.hash(data.senha, 10);
+
     return this.prisma.condomino.update({
-      where: { id },
-      data,
-      include: { usuario: true },
-    });
+    where: { id },
+    data: {
+      ...condominoData,
+      usuario: {
+        update: {
+          ...(nome && { nome }),
+          ...(email && { email }),
+          ...(senhaCriptografada && { senha: senhaCriptografada }),
+        },
+      },
+    },
+    include: { usuario: true },
+  });
   }
 
   // ----------------------------
@@ -92,12 +106,15 @@ export class CondominosService {
   // ----------------------------
   async remove(id: number) {
     const cond = await this.prisma.condomino.findUnique({ where: { id } });
+
     if (!cond) throw new NotFoundException('Condômino não encontrado.');
 
-    // Exclui o usuário vinculado junto
-    await this.prisma.usuario.delete({
-      where: { id: cond.usuarioId },
+    await this.prisma.condomino.delete({
+      where: { id },
     });
+
+    // Exclui o usuário vinculado junto
+    await this.usuariosService.removeUser(cond.usuarioId);
     
     return { message: 'Condômino removido com sucesso' };
   }
