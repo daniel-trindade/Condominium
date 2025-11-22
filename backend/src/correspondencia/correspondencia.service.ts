@@ -9,7 +9,6 @@ import { RegistrarRetiradaDto } from './dto/registrar-retirada.dto';
 export class CorrespondenciaService {
   constructor(private prisma: PrismaService) {}
 
-  // 🔹 Registrar entrada de correspondência
   async registrarEntrada(dto: RegistrarEntradaDto) {
     return this.prisma.correspondencia.create({
       data: {
@@ -22,7 +21,6 @@ export class CorrespondenciaService {
     });
   }
 
-  // 🔹 Notificar condômino (gera notificação)
   async notificarCondomino(dto: NotificarCondominoDto) {
     return this.prisma.notificacao.create({
       data: {
@@ -32,7 +30,6 @@ export class CorrespondenciaService {
     });
   }
 
-  // 🔹 Registrar retirada
   async registrarRetirada(id: number, dto: RegistrarRetiradaDto) {
     return this.prisma.correspondencia.update({
       where: { id },
@@ -43,7 +40,6 @@ export class CorrespondenciaService {
     });
   }
 
-  // 🔹 Listar correspondências pendentes
   async listarPendentes() {
     return this.prisma.correspondencia.findMany({
       where: { dataRetirada: null },
@@ -51,7 +47,6 @@ export class CorrespondenciaService {
     });
   }
 
-  // 🔹 Histórico de correspondências
   async listarHistorico() {
     return this.prisma.correspondencia.findMany({
       include: { condomino: true, porteiro: true },
