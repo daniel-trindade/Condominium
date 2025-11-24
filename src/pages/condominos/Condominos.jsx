@@ -203,6 +203,7 @@ function Condominos() {
               <form className={styles.modo_consulta}>
                 <label htmlFor="modo_consulta">Selecione modo de consulta:</label>
                 <select id="modo_consulta" name="modo_consulta" onChange={handleChange_MC} >
+                  <option value="sem_seleção">Selecione uma Opção</option>
                   <option value="nome">Por Nome</option>
                   <option value="apartamento">Por Apartamento</option>
                   <option value="cpf">Por CPF</option>
