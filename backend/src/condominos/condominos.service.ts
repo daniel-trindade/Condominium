@@ -19,23 +19,53 @@ export class CondominosService {
       senha: data.senha,
       tipo: 'CONDOMINO',
     });
-    return this.prisma.condomino.create({
+
+    const owner = await this.prisma.condomino.create({
       data: {
         cpf: data.cpf,
         telefone: data.telefone,
         apartamento: data.apartamento,
-        andar: data.andar,
+        bloco: data.bloco,
+        data_nasc: data.data_nasc,
+        foto: data.foto ?? null,
         usuarioId: usuario.id,
       },
       include: { usuario: true },
     });
+
+    return {
+      nome: usuario.nome,
+      telefone: owner.telefone,
+      cpf: owner.cpf,
+      data_nascimento: owner.data_nasc,
+      bloco: owner.bloco,
+      apartamento: owner.apartamento,
+      foto: owner.foto,
+
+
+    }
   }
 
-  findAllUnitOwner() {
+  async findAllUnitOwner() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-    return this.prisma.condomino.findMany({
-      include: { usuario: true },
+    const owners = await this.prisma.usuario.findMany({
+        where: { tipo: 'CONDOMINO' },
+        include: {
+          Condomino: true,
+        },
     });
+
+    return owners.map(user => ({
+      nome: user.nome,
+      telefone: user.Condomino?.telefone,
+      cpf: user.Condomino?.cpf,
+      data_nascimento: user.Condomino?.data_nasc,
+      bloco: user.Condomino?.bloco,
+      apartamento: user.Condomino?.apartamento,
+      foto: user.Condomino?.foto
+
+    }));
+    
   }
 
   async searchByFilters(filtros: {

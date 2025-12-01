@@ -17,11 +17,30 @@ CREATE TABLE `Condomino` (
     `cpf` VARCHAR(191) NOT NULL,
     `telefone` VARCHAR(191) NOT NULL,
     `apartamento` VARCHAR(191) NOT NULL,
-    `andar` INTEGER NOT NULL DEFAULT 0,
-    `usuarioId` INTEGER NOT NULL DEFAULT 1,
+    `bloco` VARCHAR(191) NOT NULL,
+    `data_nasc` DATETIME(3) NOT NULL,
+    `usuarioId` INTEGER NOT NULL,
+    `foto` VARCHAR(191) NULL,
 
     UNIQUE INDEX `Condomino_cpf_key`(`cpf`),
     UNIQUE INDEX `Condomino_usuarioId_key`(`usuarioId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Veiculo` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `cor` VARCHAR(191) NOT NULL,
+    `modelo` VARCHAR(191) NOT NULL,
+    `marca` VARCHAR(191) NOT NULL,
+    `placa` VARCHAR(191) NOT NULL,
+    `ano` INTEGER NOT NULL,
+    `bloco` VARCHAR(191) NOT NULL,
+    `apartamento` VARCHAR(191) NOT NULL,
+    `condominoId` INTEGER NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    UNIQUE INDEX `Veiculo_placa_key`(`placa`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -123,6 +142,9 @@ CREATE TABLE `Reserva` (
 
 -- AddForeignKey
 ALTER TABLE `Condomino` ADD CONSTRAINT `Condomino_usuarioId_fkey` FOREIGN KEY (`usuarioId`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Veiculo` ADD CONSTRAINT `Veiculo_condominoId_fkey` FOREIGN KEY (`condominoId`) REFERENCES `Condomino`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Porteiro` ADD CONSTRAINT `Porteiro_usuarioId_fkey` FOREIGN KEY (`usuarioId`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

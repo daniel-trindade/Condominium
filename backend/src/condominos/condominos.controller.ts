@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { CondominosService } from './condominos.service';
 import { CreateCondominoDto } from './dto/createCondomino.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UpdateCondDto } from './dto/updateCond.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { extname } from 'path';
 
 @Controller('condominiums')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -13,6 +15,7 @@ export class CondominosController {
 
   @Post()
   @Roles('admin')
+ 
   async createUnitOwner(@Body() createDto: CreateCondominoDto) {
     return this.service.registerUnitOwner(createDto);
   }
@@ -53,3 +56,5 @@ export class CondominosController {
   }
 
 }
+
+
