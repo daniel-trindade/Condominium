@@ -44,6 +44,7 @@ model Veiculo {
   ano          Int
   bloco        String
   apartamento  String
+  foto         String
   condominoId  Int
   condomino    Condomino  @relation(fields: [condominoId], references: [id])
   createdAt    DateTime   @default(now())
@@ -125,9 +126,8 @@ model AreaComum {
 
 model Reserva {
   id            Int       @id @default(autoincrement())
-  dataReserva   DateTime
-  horarioInicio DateTime
-  horarioFim    DateTime
+  dataInicio    DateTime
+  dataFim       DateTime
   areaId        Int
   condominoId   Int
   area          AreaComum   @relation(fields: [areaId], references: [id])

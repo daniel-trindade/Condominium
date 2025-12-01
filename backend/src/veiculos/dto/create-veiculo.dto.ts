@@ -37,6 +37,7 @@ class VeiculoDto {
   @IsString()
   @IsNotEmpty()
   apartamento: string;
+  foto: string;
 }
 
 export class CreateVeiculosDto {

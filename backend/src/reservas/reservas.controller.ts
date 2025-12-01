@@ -1,38 +1,33 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ReservasService } from './reservas.service';
+import { CreateReservasDto } from './dto/createReservas.dto';
 
 @Controller('reservas')
 export class ReservasController {
   constructor(private service: ReservasService) {}
 
   @Post()
-  criar(@Body() body: {
-    dataReserva: Date;
-    horarioInicio: Date;
-    horarioFim: Date;
-    areaId: number;
-    condominoId: number;
-  }) {
-    return this.service.criarReserva(body);
+  create(@Body() body: CreateReservasDto) {
+    return this.service.createReservation(body);
   }
 
   @Get()
-  listar() {
-    return this.service.listarReservas();
+  findAll() {
+    return this.service.findAllReservations();
   }
 
   @Get(':id')
-  buscarPorId(@Param('id') id: string) {
-    return this.service.buscarPorId(Number(id));
+  findById(@Param('id') id: string) {
+    return this.service.findReservationById(Number(id));
   }
 
   @Patch(':id')
-  atualizar(@Param('id') id: string, @Body() body: { status?: string }) {
-    return this.service.atualizarReserva(Number(id), body);
+  update(@Param('id') id: string, @Body() body: { status?: string }) {
+    return this.service.updateReservation(Number(id), body);
   }
 
   @Delete(':id')
-  deletar(@Param('id') id: string) {
-    return this.service.deletarReserva(Number(id));
+  delete(@Param('id') id: string) {
+    return this.service.deleteReservation(Number(id));
   }
 }

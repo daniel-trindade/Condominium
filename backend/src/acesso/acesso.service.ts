@@ -9,17 +9,17 @@ import { AtualizarAutorizacaoDto } from './dto/atualizar-autorizacao.dto';
 export class AcessoService {
   constructor(private prisma: PrismaService) {}
 
-  // 🔹 Cadastrar visitante
+  
   async cadastrarVisitante(dto: CriarVisitanteDto) {
     return this.prisma.visitante.create({ data: dto });
   }
 
-  // 🔹 Cadastrar entregador
+  
   async cadastrarEntregador(dto: CriarEntregadorDto) {
     return this.prisma.entregador.create({ data: dto });
   }
 
-  // 🔹 Atualizar autorização
+  
   async atualizarAutorizacao(
     tipo: 'visitante' | 'entregador',
     id: number,
@@ -36,7 +36,7 @@ export class AcessoService {
 
   }
 
-  // 🔹 Buscar pessoa (visitante, entregador ou condômino)
+  
   async buscarPessoa(nome?: string) {
     const [visitantes, entregadores, condominos] = await Promise.all([
       this.prisma.visitante.findMany({
@@ -53,7 +53,7 @@ export class AcessoService {
     return { visitantes, entregadores, condominos };
   }
 
-  // 🔹 Registrar acesso
+ 
   async registrarAcesso(dto: RegistrarAcessoDto) {
     return this.prisma.acesso.create({
       data: {
@@ -67,7 +67,7 @@ export class AcessoService {
     });
   }
 
-  // 🔹 Registrar saída
+  
   async registrarSaida(id: number) {
     return this.prisma.acesso.update({
       where: { id },
@@ -75,7 +75,7 @@ export class AcessoService {
     });
   }
 
-  // 🔹 Histórico de acessos
+  
   async listarHistorico() {
     return this.prisma.acesso.findMany({
       include: {
