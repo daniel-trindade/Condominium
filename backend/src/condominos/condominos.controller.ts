@@ -9,25 +9,20 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { extname } from 'path';
 
 @Controller('condominiums')
-@UseGuards(JwtAuthGuard, RolesGuard)
 export class CondominosController {
   constructor(private readonly service: CondominosService) {}
 
-  @Post()
-  @Roles('admin')
- 
+  @Post() 
   async createUnitOwner(@Body() createDto: CreateCondominoDto) {
     return this.service.registerUnitOwner(createDto);
   }
 
   @Get()
-  @Roles('admin')
   findUnitOwner() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.service.findAllUnitOwner();
   }
   @Post('search')
-  @Roles('admin')
   async search(
     @Body()
     filtros: {
@@ -41,7 +36,6 @@ export class CondominosController {
   }
 
   @Patch(':id')
-  @Roles('admin', 'condomino')
   update(
     @Param('id') id: string,
     @Body() updateDto: UpdateCondDto,
@@ -50,7 +44,6 @@ export class CondominosController {
   }
 
   @Delete(':id')
-  @Roles('admin')
   remove(@Param('id') id: string) {
     return this.service.remove(Number(id));
   }
