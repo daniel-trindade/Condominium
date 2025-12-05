@@ -6,7 +6,7 @@ import { CreateVeiculosDto } from './dto/create-veiculo.dto';
 export class VeiculosService {
   constructor(private prisma: PrismaService) {}
 
-  // 🔹 Cadastrar vários veículos
+  
    async cadastrarVeiculos(dto: CreateVeiculosDto) {
     const { condominoId, veiculos } = dto;
 
@@ -19,16 +19,32 @@ export class VeiculosService {
         ano: v.ano,
         bloco: v.bloco,
         apartamento: v.apartamento,
+        foto: v.foto,
         condominoId: condominoId,
       })),
     });
   }
 
-  // Consultar veículo por placa
+ 
   async consultarPorPlaca(placa: string) {
-    return this.prisma.veiculo.findUnique({
+    const veiculo = await this.prisma.veiculo.findUnique({
       where: { placa },
       include: { condomino: true },
     });
+
+    if (!veiculo) {
+      throw new NotFoundException('Veículo não encontrado');
+    }
+
+    return {
+      marca: veiculo.marca,
+      modelo: veiculo.modelo,
+      ano: veiculo.ano,
+      placa: veiculo.placa,
+      cor: veiculo.cor,
+      bloco: veiculo.bloco,
+      apartamento: veiculo.apartamento,
+      foto: veiculo.foto
+    };
   }
 }
