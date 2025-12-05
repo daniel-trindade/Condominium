@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma.service';
 import { RegistrarAcessoDto } from 'src/acesso/dto/registrar-acesso.dto';
-import { RegistrarEntradaDto } from './dto/registrar-entrada.dto';
-import { NotificarCondominoDto } from './dto/notificar-condomino.dto';
-import { RegistrarRetiradaDto } from './dto/registrar-retirada.dto';
+import { RegisterOpenDto } from './dto/register-open.dto';
+import { NotifyCondominoDto } from './dto/notify-condomino.dto';
+import { RegisterPickupDto } from './dto/register-rpickup.dto';
 
 @Injectable()
 export class CorrespondenciaService {
   constructor(private prisma: PrismaService) {}
 
-  async registrarEntrada(dto: RegistrarEntradaDto) {
+  async registrarEntrada(dto: RegisterOpenDto) {
     return this.prisma.correspondencia.create({
       data: {
         descricao: dto.descricao,
@@ -21,7 +21,7 @@ export class CorrespondenciaService {
     });
   }
 
-  async notificarCondomino(dto: NotificarCondominoDto) {
+  async notificarCondomino(dto: NotifyCondominoDto) {
     return this.prisma.notificacao.create({
       data: {
         mensagem: `Você possui uma correspondência aguardando retirada: ${dto.descricao}`,
@@ -30,7 +30,7 @@ export class CorrespondenciaService {
     });
   }
 
-  async registrarRetirada(id: number, dto: RegistrarRetiradaDto) {
+  async registrarRetirada(id: number, dto: RegisterPickupDto) {
     return this.prisma.correspondencia.update({
       where: { id },
       data: {
