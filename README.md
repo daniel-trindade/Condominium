@@ -1,69 +1,173 @@
-# Eng-de-Software-UFRN
+````markdown
+# Condominium - Sistema de Gerenciamento de Condomínios
+
 ## Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
-- [Como clonar ou baixar](#como-clonar-ou-baixar)  
+- [Tecnologias e Arquitetura](#tecnologias-e-arquitetura)
+- [Como clonar ou baixar](#como-clonar-ou-baixar)
 - [Estrutura do Projeto](#estrutura-do-projeto)
-- [Diagramas do Projeto](#diagramas-do-projeto) 
-- [Licença](#licença)  
+- [Como Rodar o Projeto](#como-rodar-o-projeto)
+- [Documentação Técnica](#documentação-técnica)
+- [Licença](#licença)
 
 ## Sobre o Projeto
 
-### Título
-Condominium
-
 ### Descrição
-Software para gerenciamento de condomínios desenvolvido para na disciplina de Engenharia de Software da UFRN. Este projeto esta sendo desenvolvido utilizando os conceitos de metodologias ágeis e GIT explorados na disciplina.
+Software para gerenciamento de condomínios desenvolvido na disciplina de Engenharia de Software da UFRN. O sistema visa facilitar a comunicação entre portaria, administração e moradores, focando em controle de acesso, correspondências e reservas.
 
-### Componentes
+Este projeto está sendo desenvolvido utilizando conceitos de **Metodologias Ágeis**, **Arquitetura Modular (MVCS)** e **Princípios SOLID**, com foco em entregas iterativas (MVP).
+
+### Componentes da Equipe
 - [Celine Helena Abrantes de Andrade](https://github.com/celinehelena)
 - [Daniel Bruno Trindade da Silva](https://github.com/daniel-trindade)
 - [Felipe Rocha Silva](https://github.com/felipe0x)
 
+---
+
+## Tecnologias e Arquitetura
+
+O projeto está dividido em duas partes principais (Backend e Frontend), desenvolvidas de forma desacoplada.
+
+### Backend (Branch `dev`)
+- **Framework:** NestJS (Node.js)
+- **Banco de Dados:** MySQL (via Prisma ORM)
+- **Arquitetura:** MVCS (Model-View-Controller-Service)
+- **Testes:** Jest
+
+### Frontend (Branch `frontend`)
+- **Framework:** React + Vite
+- **Estilização:** CSS / CSS Modules
+- **Gerenciamento de Estado:** React Context API
+
+---
+
 ## Como clonar ou baixar
 
-Você pode obter este repositório de três formas:
+Você pode obter este repositório de três formas. Para rodar o projeto completo, lembre-se que precisará tanto do Backend quanto do Frontend.
 
 ### Clonar via HTTPS
 
 ```bash
-git clone https://github.com/mvapedrosa/Eng-de-Software-UFRN.git
-```
-
-Isso criará uma cópia local do repositório em sua máquina.
+git clone [https://github.com/daniel-trindade/Condominium.git](https://github.com/daniel-trindade/Condominium.git)
+````
 
 ### Clonar via SSH
 
 Se você já configurou sua chave SSH no GitHub, pode clonar usando:
 
 ```bash
-git clone git@github.com:mvapedrosa/Eng-de-Software-UFRN.git
+git clone git@github.com:daniel-trindade/Condominium.git
 ```
-
-Isso criará uma cópia local do repositório em sua máquina.
 
 ### Baixar como ZIP
 
-1. Acesse a página do repositório no GitHub:
-   [https://github.com/daniel-trindade/Condominium](https://github.com/daniel-trindade/Condominium)
-2. Clique no botão **Code** (verde).
-3. Selecione **Download ZIP**.
-4. Extraia o arquivo ZIP para o local desejado em seu computador.
+1.  Acesse a página do repositório no GitHub: [https://github.com/daniel-trindade/Condominium](https://github.com/daniel-trindade/Condominium)
+2.  Clique no botão **Code** (verde).
+3.  Selecione **Download ZIP**.
+4.  Extraia o arquivo ZIP para o local desejado em seu computador.
 
+-----
 
 ## Estrutura do Projeto
-```
-Condominium/
-├── LICENSE
-└── diagrams/   : Pasta contendo o diagrama de classes
-└── diagrams.md  : arquivo explicando em detalhes os diagramas estruturais e comportamenais
-└──  README.md
-```
-## Diagramas do Projeto
+A organização do código reflete a separação de responsabilidades (Backend API vs Frontend Client).
 
-O projeto inclui diagramas que ajudam a entender a estrutura e o comportamento do sistema.
-> Consulte `diagrams.md` para uma explicação completa dos diagramas e do seu papel no projeto.
+### 1. Backend (Branch `dev`)
+O código da API está centralizado na pasta `backend/`. A arquitetura modular do NestJS organiza cada regra de negócio em seu próprio diretório contendo Controller, Service e DTOs.
+
+```bash
+backend/
+├── prisma/                 # Schema do banco (Prisma) e Migrations
+├── src/
+│   ├── acesso/             # Módulo de Controle de Acesso (Visitantes/Entregadores)
+│   ├── app.* # Controller principal (Health check)
+│   ├── auth/               # Autenticação (JWT Strategy, Guards, Login)
+│   ├── common/             # Utilitários globais (Prisma Service)
+│   ├── condominos/         # CRUD de Condôminos
+│   ├── correspondencia/    # Gestão de entrada/saída de encomendas
+│   ├── porteiros/          # Gestão de funcionários
+│   ├── reservas/           # Lógica de reserva de áreas comuns
+│   ├── usuarios/           # Gestão de usuários do sistema
+│   ├── veiculos/           # Cadastro de veículos
+│   └── main.ts             # Ponto de entrada da aplicação
+├── test/                   # Testes de integração (e2e)
+├── package.json            # Dependências do Backend
+└── docs/                   # Documentação técnica e evidências
+
+---
+
+## Como Rodar o Projeto
+
+Para executar o sistema completo, você precisará de dois terminais: um para o Backend e outro para o Frontend.
+
+### Pré-requisitos
+
+  * Node.js
+  * NPM ou Yarn
+  * Git
+
+### 1\. Executando o Backend (API)
+
+```bash
+# 1. Acesse a pasta e mude para a branch de desenvolvimento
+cd Condominium
+git checkout develop
+
+# 2. Instale as dependências
+npm install
+
+# 3. Configure o banco de dados (Prisma)
+npx prisma generate
+
+# 4. Rode o servidor em modo de desenvolvimento
+npm run start:dev
+# O servidor iniciará em http://localhost:3000
+```
+
+### 2\. Executando o Frontend (Interface)
+
+Em um **novo terminal**:
+
+```bash
+# 1. Mude para a branch do frontend
+git checkout frontend
+
+# 2. Instale as dependências
+npm install
+
+# 3. Rode o projeto
+npm run dev
+# O frontend estará acessível (geralmente em http://localhost:5173)
+```
+
+### 3\. Rodando os Testes
+
+O backend possui cobertura de testes unitários. Para executar:
+
+```bash
+# Certifique-se de estar na branch 'dev'
+npm test
+# Para ver a cobertura:
+npm run test:cov
+```
+
+-----
+
+## Documentação Técnica
+
+Para detalhes aprofundados sobre a modelagem e decisões de projeto, consulte os documentos na pasta `docs`:
+
+  * [Histórias de Usuário](https://www.google.com/search?q=./docs/user-stories.md)
+  * [Diagramas UML (Classes e Atividades)](https://www.google.com/search?q=./docs/diagrams.md)
+  * [Padrões de Projeto (Design Patterns)](https://www.google.com/search?q=./docs/patterns.md)
+  * [Princípios de Projeto (SOLID)](https://www.google.com/search?q=./docs/principles.md)
+  * [Relatório de Testes Unitários](https://www.google.com/search?q=./docs/unit-test.md)
+
+-----
 
 ## Licença
 
 Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo `LICENSE` para mais detalhes.
+
+```
+```

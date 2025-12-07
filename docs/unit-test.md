@@ -63,7 +63,7 @@ O teste alcança **100% de cobertura** para o `AcessoController`, verificando:
 
 ## Resultado dos Testes
 
-![Resultado dos Testes no Terminal](./screen.jpg)
+![Resultado dos Testes no Terminal](./screenshots/screen.jpg)
 
 *Execução bem-sucedida dos testes mostrando todos os casos passando*
 
