@@ -28,12 +28,12 @@ Este projeto está sendo desenvolvido utilizando conceitos de **Metodologias Ág
 
 O projeto está dividido em duas partes principais (Backend e Frontend), desenvolvidas de forma desacoplada, utilizando uma arquitetura MVCS.
 
-### Backend (Branch `dev`)
+### Backend
 - **Framework:** NestJS (Node.js)
 - **Banco de Dados:** MySQL (via Prisma ORM)
 - **Testes:** Jest
 
-### Frontend (Branch `frontend`)
+### Frontend
 - **Framework:** React + Vite
 - **Estilização:** CSS / CSS Modules
 - **Gerenciamento de Estado:** React Context API
