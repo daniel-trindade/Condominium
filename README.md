@@ -67,7 +67,7 @@ git clone git@github.com:daniel-trindade/Condominium.git
 
 A organização do código reflete a separação de responsabilidades (Backend API vs Frontend Client).
 
-### 1. Backend (Branch `dev`)
+### 1. Backend
 
 O código da API está centralizado na pasta `backend/`. A arquitetura modular do NestJS organiza cada regra de negócio em seu próprio diretório contendo Controller, Service e DTOs.
 
@@ -91,7 +91,7 @@ backend/
 └── docs/                   # Documentação técnica
 ```
 
-### 2. Frontend (Branch `frontend`)
+### 2. Frontend
 
 A interface web foi construída com React e Vite, organizada por componentes visuais e páginas.
 
@@ -121,7 +121,7 @@ frontend/
 
 ## Como Rodar o Projeto
 
-Para executar o sistema completo, você precisará de dois terminais: um para o Backend e outro para o Frontend.
+Como até então, o backend e o frontend não foram integrados, eles estão rodando separadamente.
 
 ### Pré-requisitos
 
@@ -132,9 +132,8 @@ Para executar o sistema completo, você precisará de dois terminais: um para o 
 ### 1. Executando o Backend (API)
 
 ```bash
-# 1. Acesse a pasta e mude para a branch de desenvolvimento
+# 1. Acesse a pasta do repositório
 cd Condominium
-git checkout dev
 
 # 2. Instale as dependências
 npm install
@@ -152,8 +151,8 @@ npm run start:dev
 Em um **novo terminal**:
 
 ```bash
-# 1. Mude para a branch do frontend
-git checkout frontend
+# 1. Acesse a pasta do repositório
+cd Condominium
 
 # 2. Instale as dependências
 npm install
