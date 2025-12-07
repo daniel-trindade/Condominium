@@ -1,5 +1,4 @@
-# Condominium - Sistema de Gerenciamento de Condomínios
-
+# Eng-de-Software-UFRN
 ## Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
@@ -11,6 +10,9 @@
 - [Licença](#licença)
 
 ## Sobre o Projeto
+
+### Título
+Condominium
 
 ### Descrição
 Software para gerenciamento de condomínios desenvolvido na disciplina de Engenharia de Software da UFRN. O sistema visa facilitar a comunicação entre portaria, administração e moradores, focando em controle de acesso, correspondências e reservas.
