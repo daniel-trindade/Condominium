@@ -1,4 +1,3 @@
-````markdown
 # Condominium - Sistema de Gerenciamento de Condomínios
 
 ## Índice
@@ -23,8 +22,6 @@ Este projeto está sendo desenvolvido utilizando conceitos de **Metodologias Ág
 - [Daniel Bruno Trindade da Silva](https://github.com/daniel-trindade)
 - [Felipe Rocha Silva](https://github.com/felipe0x)
 
----
-
 ## Tecnologias e Arquitetura
 
 O projeto está dividido em duas partes principais (Backend e Frontend), desenvolvidas de forma desacoplada.
@@ -40,8 +37,6 @@ O projeto está dividido em duas partes principais (Backend e Frontend), desenvo
 - **Estilização:** CSS / CSS Modules
 - **Gerenciamento de Estado:** React Context API
 
----
-
 ## Como clonar ou baixar
 
 Você pode obter este repositório de três formas. Para rodar o projeto completo, lembre-se que precisará tanto do Backend quanto do Frontend.
@@ -49,7 +44,7 @@ Você pode obter este repositório de três formas. Para rodar o projeto complet
 ### Clonar via HTTPS
 
 ```bash
-git clone [https://github.com/daniel-trindade/Condominium.git](https://github.com/daniel-trindade/Condominium.git)
+git clone https://github.com/daniel-trindade/Condominium.git
 ````
 
 ### Clonar via SSH
@@ -67,12 +62,12 @@ git clone git@github.com:daniel-trindade/Condominium.git
 3.  Selecione **Download ZIP**.
 4.  Extraia o arquivo ZIP para o local desejado em seu computador.
 
------
-
 ## Estrutura do Projeto
+
 A organização do código reflete a separação de responsabilidades (Backend API vs Frontend Client).
 
 ### 1. Backend (Branch `dev`)
+
 O código da API está centralizado na pasta `backend/`. A arquitetura modular do NestJS organiza cada regra de negócio em seu próprio diretório contendo Controller, Service e DTOs.
 
 ```bash
@@ -93,8 +88,13 @@ backend/
 ├── test/                   # Testes de integração (e2e)
 ├── package.json            # Dependências do Backend
 └── docs/                   # Documentação técnica e evidências
+```
 
----
+### 2\. Frontend (Branch `frontend`)
+
+A interface web foi construída com React e Vite, organizada por componentes visuais e páginas.
+
+FALTA COLOCAR
 
 ## Como Rodar o Projeto
 
@@ -106,12 +106,12 @@ Para executar o sistema completo, você precisará de dois terminais: um para o 
   * NPM ou Yarn
   * Git
 
-### 1\. Executando o Backend (API)
+### 1. Executando o Backend (API)
 
 ```bash
 # 1. Acesse a pasta e mude para a branch de desenvolvimento
 cd Condominium
-git checkout develop
+git checkout dev
 
 # 2. Instale as dependências
 npm install
@@ -151,8 +151,6 @@ npm test
 npm run test:cov
 ```
 
------
-
 ## Documentação Técnica
 
 Para detalhes aprofundados sobre a modelagem e decisões de projeto, consulte os documentos na pasta `docs`:
@@ -163,11 +161,7 @@ Para detalhes aprofundados sobre a modelagem e decisões de projeto, consulte os
   * [Princípios de Projeto (SOLID)](https://www.google.com/search?q=./docs/principles.md)
   * [Relatório de Testes Unitários](https://www.google.com/search?q=./docs/unit-test.md)
 
------
-
 ## Licença
 
-Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](https://www.google.com/search?q=./LICENSE) para mais detalhes.
 
-```
-```
