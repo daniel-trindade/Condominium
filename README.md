@@ -17,7 +17,7 @@ Condominium
 ### Descrição
 Software para gerenciamento de condomínios desenvolvido na disciplina de Engenharia de Software da UFRN. O sistema visa facilitar a comunicação entre portaria, administração e moradores, focando em controle de acesso, correspondências e reservas.
 
-Este projeto está sendo desenvolvido utilizando conceitos de **Metodologias Ágeis**, **Arquitetura Modular (MVCS)** e **Princípios SOLID**, com foco em entregas iterativas (MVP).
+Este projeto está sendo desenvolvido utilizando conceitos de **Metodologias Ágeis**, **Arquitetura MVCS** e **Princípios SOLID**, com foco em entregas iterativas.
 
 ### Componentes da Equipe
 - [Celine Helena Abrantes de Andrade](https://github.com/celinehelena)
@@ -26,12 +26,11 @@ Este projeto está sendo desenvolvido utilizando conceitos de **Metodologias Ág
 
 ## Tecnologias e Arquitetura
 
-O projeto está dividido em duas partes principais (Backend e Frontend), desenvolvidas de forma desacoplada.
+O projeto está dividido em duas partes principais (Backend e Frontend), desenvolvidas de forma desacoplada, utilizando uma arquitetura MVCS.
 
 ### Backend (Branch `dev`)
 - **Framework:** NestJS (Node.js)
 - **Banco de Dados:** MySQL (via Prisma ORM)
-- **Arquitetura:** MVCS (Model-View-Controller-Service)
 - **Testes:** Jest
 
 ### Frontend (Branch `frontend`)
@@ -78,7 +77,7 @@ backend/
 ├── src/
 │   ├── acesso/             # Módulo de Controle de Acesso (Visitantes/Entregadores)
 │   ├── app.* # Controller principal (Health check)
-│   ├── auth/               # Autenticação (JWT Strategy, Guards, Login)
+│   ├── auth/               # Autenticação (JWT Strategy, Login)
 │   ├── common/             # Utilitários globais (Prisma Service)
 │   ├── condominos/         # CRUD de Condôminos
 │   ├── correspondencia/    # Gestão de entrada/saída de encomendas
@@ -89,14 +88,36 @@ backend/
 │   └── main.ts             # Ponto de entrada da aplicação
 ├── test/                   # Testes de integração (e2e)
 ├── package.json            # Dependências do Backend
-└── docs/                   # Documentação técnica e evidências
+└── docs/                   # Documentação técnica
 ```
 
-### 2\. Frontend (Branch `frontend`)
+### 2. Frontend (Branch `frontend`)
 
 A interface web foi construída com React e Vite, organizada por componentes visuais e páginas.
 
-FALTA COLOCAR
+```bash
+frontend/
+├── public/                 # Arquivos estáticos
+├── src/
+│   ├── assets/             # Imagens e ícones do sistema
+│   ├── components/         # Componentes reutilizáveis
+│   │   ├── action_button/  # Exemplo de componente com estilo isolado
+│   │   │   ├── ActionButton.jsx
+│   │   │   └── ActionButton.module.css
+│   │   ├── container/
+│   │   ├── footer/
+│   │   ├── login_navbar/
+│   │   └── menuCard/
+│   ├── contexts/           # Gerenciamento de estado (AuthContext)
+│   ├── pages/              # Páginas da aplicação
+│   │   ├── condominos/     # Tela de Condôminos
+│   │   ├── home/           # Tela Inicial
+│   │   ├── login/          # Tela de Login
+│   │   └── veiculos/       # Tela de Veículos
+│   ├── App.jsx             # Componente Raiz e Rotas
+│   └── main.jsx            # Ponto de entrada do React
+└── vite.config.js          # Configuração do Build
+```
 
 ## Como Rodar o Projeto
 
@@ -153,6 +174,22 @@ npm test
 npm run test:cov
 ```
 
+## Resumo da Implementação
+
+Uma breve explicação sobre a implementação  a no código.
+
+### No Backend (NestJS)
+O fluxo de dados foi desenhado seguindo o padrão **Controller -> Service -> Repository**:
+1.  **Módulos:** O sistema é dividido em módulos isolados (ex: `acesso`, `condominos`) em `src/`, facilitando a manutenção.
+2.  **Segurança (Auth):** A estrutura de autenticação inclui o `AuthModule` e o `jwt-auth.guard.ts`, implementados com o objetivo de validar tokens JWT e proteger rotas privadas.
+3.  **Banco de Dados:** O `PrismaService` atua como camada de abstração de dados, centralizando a comunicação com o banco através do Prisma Client.
+
+### No Frontend (React)
+A interface segue o modelo de componentização e estados globais:
+1.  **Estilização:** Adotamos **CSS Modules** para garantir o escopo local de estilos e evitar conflitos visuais.
+2.  **Estado Global:** A estrutura do `contexts/AuthContext.jsx` foi criada para centralizar a lógica de sessão e autenticação do usuário na aplicação.
+3.  **Roteamento:** O gerenciamento de navegação é feito no `App.jsx`, que orquestra a renderização das páginas contidas em `pages/`.
+
 ## Documentação Técnica
 
 Para detalhes aprofundados sobre a modelagem e decisões de projeto, consulte os documentos na pasta `docs`:
@@ -166,4 +203,3 @@ Para detalhes aprofundados sobre a modelagem e decisões de projeto, consulte os
 ## Licença
 
 Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](https://www.google.com/search?q=./LICENSE) para mais detalhes.
-
