@@ -28,16 +28,16 @@ function Home() {
               icon={cons_car} 
             />
             <MenuCard
+              title= "Áreas Comum"
+              description="Aqui você pode consultar a lista de condôminos cadastrados"
+              link="/area_comum"
+              icon={reservas} 
+            />
+            <MenuCard
               title= "Correspondência"
               description="Gerenciador de correspondências do condomínio"
               link="/login"
               icon={corres} 
-            />
-            <MenuCard
-              title= "Áreas Comum"
-              description="Aqui você pode consultar a lista de condôminos cadastrados"
-              link="/login"
-              icon={reservas} 
             />
             <MenuCard
               title= "Consultar Condômino"

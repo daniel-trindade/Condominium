@@ -7,6 +7,7 @@ import Login from './pages/login/Login'
 import Home from './pages/home/Home'
 import Condominos from './pages/condominos/Condominos';
 import Veiculos from './pages/veiculos/Veiculos';
+import AreaComum from './pages/area_comum/Reservas';
 
 
 
@@ -25,6 +26,7 @@ function AppLayout() {
         <Route path='/login' element={<Login />} />
         <Route path='/condominos' element={<Condominos />} />
         <Route path='/veiculos' element={<Veiculos />} />
+        <Route path='/area_comum' element={<AreaComum />} />
       </Routes>
 
       <Footer />
