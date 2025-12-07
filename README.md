@@ -194,12 +194,12 @@ A interface segue o modelo de componentização e estados globais:
 
 Para detalhes aprofundados sobre a modelagem e decisões de projeto, consulte os documentos na pasta `docs`:
 
-  * [Histórias de Usuário](https://www.google.com/search?q=./docs/user-stories.md)
-  * [Diagramas UML (Classes e Atividades)](https://www.google.com/search?q=./docs/diagrams.md)
-  * [Padrões de Projeto (Design Patterns)](https://www.google.com/search?q=./docs/patterns.md)
-  * [Princípios de Projeto (SOLID)](https://www.google.com/search?q=./docs/principles.md)
-  * [Relatório de Testes Unitários](https://www.google.com/search?q=./docs/unit-test.md)
+  * [Histórias de Usuário](./docs/user-stories.md)
+  * [Diagramas UML (Classes e Atividades)](./docs/diagrams.md)
+  * [Padrões de Projeto (Design Patterns)](./docs/patterns.md)
+  * [Princípios de Projeto (SOLID)](./docs/principles.md)
+  * [Relatório de Testes Unitários](./docs/unit-test.md)
 
 ## Licença
 
-Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](https://www.google.com/search?q=./LICENSE) para mais detalhes.
+Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
