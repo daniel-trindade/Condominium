@@ -1,0 +1,22 @@
+    .homeContainer{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .header{
+        width: 100%;
+        min-height: 10vh;
+    }
+
+    .menu{
+        width: 80%;
+        min-height: calc(100vh - 166px - 15vh);
+
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(5, 1fr);  
+        align-content:space-around;
+    }

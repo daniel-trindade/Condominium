@@ -1,0 +1,74 @@
+.reservasWrapper {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+
+    h1{
+        margin-bottom: 20px;
+    }
+}
+
+.tagReserva {
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 4px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.reservaContainer{
+    height: 700px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.formReserva {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 15px;
+
+    label {
+        font-size: 16px;
+    }
+
+    input {
+        width: 100%;
+        height: 35px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    button {
+        width: 100%;
+        height: 40px;
+        background-color: #44576D;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    select {
+        width: 100%;
+        height: 35px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        padding: 5px;
+    }
+}
+
+.calendario {
+    flex: 1;
+    margin-left: 20px;
+}
